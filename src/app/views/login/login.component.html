@@ -1,0 +1,39 @@
+<div class="login">
+	<div class="login-container">
+		<div class="login-decoration">
+				<h1>Devoid <img src="assets/img/devoid.svg"></h1>
+		</div>
+		<div class="login-content">
+
+			<div class="login-content-form">
+				<form [formGroup]="loginForm" novalidate (ngSubmit)="onLogin(loginForm.value)">
+					<h2>Sing In</h2>
+
+
+					<input type="email" placeholder="Correo" formControlName="email" name="email">
+					<div class="error" *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+						<div *ngIf="loginForm.get('email')?.hasError('required')">email requerido</div>
+						<div *ngIf="loginForm.get('email')?.hasError('email')">email invalido</div>
+					</div>
+
+ 
+					<input type="password" placeholder="Contraseña" formControlName="password">
+					<div class="error" *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+						<div *ngIf="loginForm.get('password')?.hasError('required')">contraseña requerida</div>
+					</div>
+
+					<div class="error">{{loginerror}}</div>
+
+					<button type="submit" mat-flat-button>Inicia Sesión</button>
+
+					<p><a routerLink="/reset-password">¿Olvidaste tu contraseña?</a></p>
+				</form>
+			</div>
+			
+			<div class="new-users">
+				<p>¿Eres nuevo en Devoid?<a routerLink="/register"> Regístrate</a></p>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,115 @@
+/*------------------------------------------------------------------------*/
+/*-----------------------------------HOME---------------------------------*/
+/*------------------------------------------------------------------------*/
+.body-container{
+    margin: 0 auto;
+    max-width: 2000px;
+}
+.div-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    margin-bottom: 5px;
+    height: 100vh;
+    max-height: 800px;
+    min-height: 400px;
+}
+.div-body h1{
+    margin-bottom: 2.5rem;
+    font-size:4rem;
+    color: black;
+    text-shadow: rgba(255, 255, 255, 0.2) 0px 0px 3px;
+}
+.body-1{
+    background-position: top;
+    background-image: url("/assets/img/24.jpg");
+}
+.body-2{
+    background-image: url("/assets/img/3.jpg");
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+}
+.body-2 > div{
+    width: 50%;
+}
+.limbo{
+    color: whitesmoke;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    color: whitesmoke;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px black;
+}
+.limbo h2{
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.limbo button{
+    margin-top: 2rem;
+}
+.body-3{
+    background-image: url("/assets/img/4.jpg");
+    background-size: cover;
+    background-position: top;
+}
+.body-4{
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    height: 80vh;
+    max-height: 800px;
+    overflow: hidden;
+    padding: 30px;
+}
+.body-4-img{
+    flex: 1;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+}
+.body-4-img img{
+    width: 100%;
+    max-height: 400px;
+    object-fit:contain;
+}
+.body-4-redes{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.body-4-redes div{
+    text-align: center;
+    max-width: 400px;
+}
+
+
+.phrase{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.37);
+    width: 80%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+}
+@media only screen and (max-width:768px){
+    .body-4{
+        flex-direction:column;
+        height: fit-content;
+    }
+    .phrase{
+        font-size: 1.5rem;
+    }
+    .div-body{
+        height: 85vh;
+    }
+}

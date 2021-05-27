@@ -1,0 +1,121 @@
+@font-face{
+    font-family: "Trajan Pro";
+    src: url("assets/fonts/TrajanPro-Regular.ttf");
+}
+@font-face{
+    font-family: "Trajan Pro Bold";
+    src: url("assets/fonts/TrajanPro-Bold.otf");
+}
+@font-face{
+    font-family: "Avenir Light";
+    src: url("assets/fonts/avenirltstd-light.otf");
+}
+* {
+    font-family: 'Avenir Light';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+img{
+    max-width: 100%;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+body{
+    background-color: #eeeeee;
+}
+h1{
+    font-family: 'Trajan Pro';
+    font-size: 3em;
+    font-weight: normal;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button{
+    height: 40px;
+    padding: 4px 5px;
+    border: 0;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+h3{
+    font-family: 'Trajan Pro Bold';
+}
+hr{
+    width: 99%;
+}
+
+.ngxImageZoomContainer{
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 5px;
+}
+.ngxImageZoomThumbnail{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.displayOnMovil{
+    display: none;
+}
+.displayOnDesktop{
+    display: block;
+}
+
+@media only screen and (max-width:768px){
+    .displayOnMovil{
+        display: block;
+    }
+    .displayOnDesktop{
+        display: none;
+    }
+}
+/*------------------------------------------------------------------------*/
+/*-----------------------------------USER---------------------------------*/
+/*------------------------------------------------------------------------*/
+.user-container{
+    width: 100%;
+    height: 550px;
+    text-align: left;
+    display: flex;
+}
+.user-menu{
+    width: 20%;
+    height: 100%;
+    border:2px #999 solid;
+}
+.user-menu ul{
+    list-style: none;
+}
+.user-menu ul li a{
+    text-decoration: none;
+    color: black;
+}
+.user-menu ul li a:hover{
+    color: #09f;
+}
+.user-content{
+    width: 80%;
+    height: 100%;
+    border:2px #999 solid;
+}
+.user-content div{
+    width: 100%;
+    margin: 250px 0;
+    text-align: center;
+}
+
+

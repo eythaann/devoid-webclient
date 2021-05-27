@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="store-container">
+
+    <div class="store-container-tittle">
+        <h1>Devoid</h1>
+        <p><i>"La vida es demasiado corta para llevar ropa aburrida"</i></p>
+    </div>
+
+    <div class="store-container-sidebar">
+        <b>Filtrar por:</b>
+        <ul>
+            <li>
+                <a (click)="reload()" [routerLink]="['/store']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Todo </a>
+            </li>
+        </ul><br>
+        <b>Colecciones</b>
+        <ul>
+            <li *ngFor="let collection of collection">
+                <a (click)="reload()" routerLink="/store" routerLinkActive="active"
+                    [queryParams]="{collection: collection.id}">{{collection.collection_name}}</a>
+            </li>
+        </ul><br>
+        <b>Tipo</b>
+        <ul>
+            <li *ngFor="let category of category">
+                <a (click)="reload()" [routerLink]="['/store']" routerLinkActive="active"
+                    [queryParams]="{category: category.id}">{{category.category_name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="store-container-shop">
+        <div class="store-shop-content">
+            <a mat-button class="store-shop-box" [routerLink]="'/store/'+product.product_route" *ngFor="let product of product">
+                <div class="store-shop-box-img"><img src="/assets/img/pro/{{ product.product_route }}.jpg"></div>
+                <div class="store-shop-box-tittle">
+                    <h3>{{ product.product_name }}</h3>
+                </div>
+                <div class="store-shop-box-description"></div>
+                <div class="store-shop-box-price"><span><b>${{ product.product_price }}</b></span></div>
+                <div class="store-shop-box-link">Agregar al carrito</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+<app-footer></app-footer>

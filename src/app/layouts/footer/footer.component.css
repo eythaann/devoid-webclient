@@ -1,0 +1,32 @@
+/*------------------------------------------------------------------------*/
+/*----------------------------------FOOTER--------------------------------*/
+/*------------------------------------------------------------------------*/
+hr{
+    margin: 5px 0;
+}
+.footer{
+    background: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    font-size: small;
+    color: black;
+}
+.footer-container{
+    padding: 10px 0;
+    width: 90%;
+    max-width: 1000px;
+    color: #555;
+}
+.links{
+    display: flex;
+    font-size:small;
+}
+ul{
+    margin: 0rem 1rem 0 0;
+}
+ul li{
+    margin: 10px;
+}
+a:hover{
+    color: #18a;
+}

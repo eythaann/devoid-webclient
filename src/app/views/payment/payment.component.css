@@ -1,0 +1,13 @@
+.main-content{
+    margin: 4rem auto 0;
+    display: flex;
+    width: 90%;
+    max-width: 800px;
+}
+h1{
+    text-align: center;
+}
+p{
+    text-align: justify;
+    margin: 12px 0;
+}

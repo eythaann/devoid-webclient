@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="store-container">
+    <div *ngFor="let item of product" class="product-container">
+        <form [formGroup]="carForm" (ngSubmit)="onAddCar(carForm.value)">
+            <div class="store-form-img">
+                <div class="store-product-img">
+                <div class="product_smalls_img">
+                    <ul>
+                        <li *ngFor="let color of colors">
+                            <img (mouseover)="imgChange(color)"
+                                src="/assets/img/pro/{{item.product_route}}_{{color}}.jpg">
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product_big_img">
+                    <lib-ngx-image-zoom [thumbImage]=img [fullImage]=img [magnification]="0.7">
+                    </lib-ngx-image-zoom>
+                </div>
+                </div>
+            </div>
+            
+                <div class="store-form-title">
+                    <h1>{{ item.product_name }}</h1><span><b>${{ item.product_price }}</b></span>
+                </div>
+                <div class="store-form">
+                    <h2> Color: </h2>
+                    <div class="color">
+                        <label *ngFor="let color of colors">
+                            <input (click)="imgChange(color)" type="radio" formControlName="color" name="color" value="{{color}}">
+                            <span class="checkmark" [ngStyle]="{'background-color': color}"></span>
+                        </label>
+                    </div><br>
+
+                    <h2> Size: </h2>
+                    <div class="size">
+                        <label *ngFor="let size of sizes">
+                            <input type="radio" formControlName="size" name="size" value="{{size}}">
+                            <span class="checkmark2">{{size}}</span>
+                        </label>
+                    </div><br>
+                </div>
+
+                <div class="store-form2">
+                    
+                    <div class="amount">
+                        <h2>Cantidad:</h2>
+                        <input type="number" formControlName="amount" min="1" max="10">
+                    </div>
+                        <button mat-flat-button class="btn-buy">Comprar</button>
+                </div>
+                <div class="description">
+                    <p>{{ item.product_description }}</p>
+                </div>
+            </form>
+    </div>
+</div>
+<app-footer></app-footer>

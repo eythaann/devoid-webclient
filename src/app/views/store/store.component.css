@@ -1,0 +1,95 @@
+/*------------------------------------------------------------------------*/
+/*----------------------------------STORE---------------------------------*/
+/*------------------------------------------------------------------------*/
+.active{
+    color: #31a2ac;
+}
+
+.store-container{
+    margin: 4rem auto;
+    width: 90%;
+    max-width: 1400px;
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto auto;
+}
+.store-container-tittle{
+    grid-column: 1/3;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+.store-shop-content{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 24%);
+    justify-content: space-between;
+    align-content: space-between;
+}
+.store-shop-box{
+    background-color:#f8f8f8;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px 1px rgba(160, 160, 160, 0.493);
+    padding: 0;
+    line-height: 18px;
+}
+.store-shop-box:hover{
+    cursor: pointer;
+}
+.store-shop-box-img{
+    width: 100%;
+    height: 30vh;
+    min-height: 250px;
+    max-height: 350px;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+}
+.store-shop-box-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.store-shop-box-tittle{
+    margin: 8px 0 2px 0;
+    width: 100%;
+}
+.store-shop-box-description{
+    display: none;
+}
+.store-shop-box-price{
+    margin: 0 0 4px 0;
+	color: grey;
+    font-size: small;
+}
+.store-shop-box-link{
+    background: #01828c;
+	text-align: center;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0 0 4px 4px;
+}
+
+
+
+@media only screen and (max-width:768px){
+    .store-container{
+        width: 95%;
+        grid-template-columns: 1fr;
+    }
+    .store-shop-content{
+        grid-template-columns: repeat(3, 32%);
+    }
+    .store-container-sidebar{
+        display: none;
+    }
+    .store-container-shop{
+        width: 100%;
+    }
+}
+@media only screen and (max-width:477px){
+    .store-shop-content{
+        grid-template-columns: repeat(2, 49%);
+    }
+}

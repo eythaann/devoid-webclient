@@ -1,0 +1,47 @@
+<header class="header">
+    <div class="header-container">
+        <div class="header-container-menu header-item">
+            <label (click)="menuSwitch()"><img src="assets/icons/menu_black_24dp.svg"></label>
+        </div>
+        <div class="header-container-logo header-item">
+            <a href=""><img src="assets/img/devoid.svg"></a>
+        </div>
+        <div class="{{menu}}" class="header-container-navigation header-item">
+            <nav class="header-navigation">
+                <ul>
+                    <li><a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+                    <li><a mat-button routerLink="/store" routerLinkActive="active">Tienda</a></li>
+                    <li><a mat-button routerLink="/support" routerLinkActive="active">Soporte</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-container-user header-item">
+                <div *ngIf="!token; then thenblock else elseblock"></div>
+                <ng-template #thenblock>
+                    <a mat-flat-button routerLink="/login" class="btn-login">Iniciar Sesión</a>
+                </ng-template>
+                <ng-template #elseblock>
+                    <label (click)="menuSwitch2()"><mat-icon class="material-icons-outlined">account_circle</mat-icon></label>
+                    <div (click)="menuSwitch2()" class="{{menu2}} user-menu-switch"></div>
+                    <div (click)="menuSwitch2()" class="{{menu2}} user-menu-box">
+                        <div>
+                            <ul>
+                                <li><div class="new-collection">aqui ira nuestra ultima coleccion</div></li>
+                                <li><a routerLink="/store">Ver todos los productos</a></li>
+                                <li><hr></li>
+                                <li>¡Hola, {{user}}!</li>
+                                <li><a routerLink="/settings/user">Editar mi informacion</a></li>
+                                <li><hr></li>
+                                <li><a routerLink="/payment">Metodos de pago</a></li>
+                                <li><a routerLink="/afiliados">Programa de afiliados</a></li>
+                                <li><a routerLink="/points">Puntos de venta</a></li>
+                                <li><a routerLink="/redes">Nuestras Redes</a></li>
+                                <li (click)="closeSession()">Cerrar Sesión</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a routerLink="/cart"><mat-icon matBadge="7" matBadgeSize="small" matBadgeColor="warn">shopping_bag</mat-icon></a>
+                </ng-template>
+        </div>
+    </div>
+</header>

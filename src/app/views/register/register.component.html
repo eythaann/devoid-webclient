@@ -1,0 +1,41 @@
+<div class="login">
+	<div class="login-container">
+		<div class="login-decoration">
+				<h1>Devoid <img src="assets/img/devoid.svg"></h1>
+		</div>
+		<div class="login-content">
+			<div class="login-content-form">
+				<form [formGroup]="registerForm" novalidate (ngSubmit)="onRegister(registerForm.value)">
+					<h2>Sing Up</h2>
+
+					<input type="text" placeholder="Nombre" formControlName="username" name="name">
+					<div class="error" *ngIf="registerForm.get('username')?.errors && registerForm.get('username')?.touched">
+						<div *ngIf="registerForm.get('username')?.hasError('required')">nombre requerido</div>
+						<div *ngIf="registerForm.get('username')?.hasError('minlength')">minimo 3 caracteres</div>
+						<div *ngIf="registerForm.get('username')?.hasError('maxlength')">maximo numero de caracteres superado</div>
+					</div>
+ 
+					<input type="email" placeholder="Correo" formControlName="email" name="email">
+					<div class="error" *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+						<div *ngIf="registerForm.get('email')?.hasError('required')">email requerido</div>
+						<div *ngIf="registerForm.get('email')?.hasError('email')">email invalido</div>
+					</div>
+
+					<input type="password" placeholder="Contraseña" formControlName="password">
+					<div class="error" *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+						<div *ngIf="registerForm.get('password')?.hasError('required')">contraseña requerida</div>
+						<div *ngIf="registerForm.get('password')?.hasError('minlength')">minimo 8 caracteres</div>
+					</div>
+
+
+					<div class="error">{{ registerError }}</div>
+
+					<button type="submit" mat-flat-button>Registrase</button>
+				</form>
+			</div>
+			<div class="new-users">
+				<p>¿Ya tienes una cuenta?<a routerLink="/login"> Entra aquí</a></p>
+			</div>
+		</div>
+	</div>
+</div>

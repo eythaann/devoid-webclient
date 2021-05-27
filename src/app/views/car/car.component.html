@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<div class="store-container">
+    <h1>Carrito</h1>
+    <hr />
+    <div *ngIf="cart" class="store-container-car">
+        <div class="store-car-content">
+            <div *ngFor="let item of car" class="store-car-box">
+                <div class="store-car-box-part1">
+                    <img src="assets/img/pro/{{item.product_route}}_{{item.product_color}}.jpg" />
+                </div>
+                <div class="store-car-box-part2">
+                    <h3>
+                        {{ item.product_name }} {{ item.product_color }} -
+                        {{ item.product_size }}
+                    </h3>
+                    <p>{{ item.product_description | slice: 0:115 }}...</p>
+                    <div>
+                        <b>cantidad:</b> {{ item.product_amount }} |
+                        <label (click)="carDelete(item.car_id)" class="delete_item">eliminar</label>
+                    </div>
+                </div>
+                <div class="store-car-box-part3">
+                    <h5>{{ item.product_price | currency }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="store-container-resumen">
+            <h3>Resumen del Pedido</h3>
+            <p>
+                Subtotal ({{ totalAmount }} items): <b>{{ subtotal | currency }}</b>
+            </p><br>
+            <button mat-flat-button class="paypal" (click)="payPaypal()"><img src="/assets/icons/white-paypal.svg"></button>
+            <button mat-flat-button class="efectivo" (click)="payEfectivo()">Efectivo / Deposito <mat-icon>payments</mat-icon></button>
+            <!-- <button mat-button class="apple"><img src="/assets/icons/apple.png"></button>
+            <button mat-button class="google"><img src="/assets/icons/google-pay.png"></button> -->
+            
+           
+        </div>
+    </div>
+    <div *ngIf="!cart" class="no-cart">
+        <div>
+            <h2>Ningun producto ha sido agregado</h2><br>
+            <a routerLink="/store"><button>Ver tienda</button></a>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

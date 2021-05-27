@@ -1,0 +1,20 @@
+.main-content{
+    margin: 4rem auto 2rem;
+    width: 90%;
+    max-width: 800px;
+}
+h1{
+    text-align: center;
+}
+p{
+    text-align: justify;
+    margin: 12px 0;
+}
+li{
+    list-style:square;
+    margin: 10px 2rem;
+}
+a{
+    font-weight: 600;
+    color: #31a2ac;
+}
