@@ -86,6 +86,9 @@ button{
 .paypal{
     background: linear-gradient(120DEG,#00a3e9 ,#003cac);
 }
+.paypal:disabled{
+    background-color: #00a319;
+}
 
 .google{
     background-color: white;

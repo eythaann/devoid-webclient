@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {logini, registeri} from '../../models/login.interface';
 import {responsei} from '../../models/response.interface';
 import {productlist, productI, carI, params} from '../../models/store.interface';
@@ -11,11 +12,19 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  constructor(private http:HttpClient) { 
-  }
+  url:string = 'https://devoid-api.ue.r.appspot.com/api/v1/' // 
+  token: string = '';
+  
+  constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
+    private http:HttpClient
+    ) {
+      if(isPlatformBrowser(platformid)){
+        this.token = localStorage.getItem('token')||'';
+      }
+     }
   /* variables */
-url:string = 'http://100.64.183.173:3000/api/v1/' // 'http://192.168.100.4:3000/api/v1/' //'http://100.64.183.173:3000'
-token = localStorage.getItem('token')||'';
+
 
 /* login */
   loginByEmail(form: logini):Observable<responsei>{

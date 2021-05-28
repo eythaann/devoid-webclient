@@ -14,9 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    HeaderModule,
-    FooterModule,
     MatButtonModule,
+    HeaderModule,
+    FooterModule
   ],
 })
 export class HomeModule { }

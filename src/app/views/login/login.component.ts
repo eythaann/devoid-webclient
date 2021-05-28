@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { Title } from '@angular/platform-browser';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api/api.service';
 import { logini } from '../../models/login.interface';
 import { Router } from '@angular/router';
 import { responsei } from 'src/app/models/response.interface';
-import { debounceTime } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,10 @@ import { debounceTime } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  loginerror: string | undefined;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
     private api: ApiService,
     private router: Router,
     private fb: FormBuilder,
@@ -36,13 +39,16 @@ export class LoginComponent implements OnInit {
         ]
       ],
     });
+
+    this.title.setTitle('Login - Devoid');
+    if(isPlatformBrowser(platformid)){
+      this.checklocalstorage();
+    }
   }
 
-  loginerror: string | undefined;
+ 
 
   ngOnInit(): void {
-    this.title.setTitle('Login - Devoid');
-    this.checklocalstorage();
   }
 
   checklocalstorage() {

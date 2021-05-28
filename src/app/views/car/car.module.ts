@@ -9,21 +9,30 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api/api.service';
+import { MatButtonModule } from '@angular/material/button';
+import { CartDeleteConfirmComponent } from 'src/app/layouts/cart-delete-confirm/cart-delete-confirm.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [CarComponent],
+  declarations: [
+    CarComponent,
+    CartDeleteConfirmComponent,
+  ],
   imports: [
     CommonModule,
     CarRoutingModule,
     HeaderModule,
     FooterModule,
     MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
   providers:[
     ApiService
   ],
+  entryComponents: [CartDeleteConfirmComponent]
 })
 export class CarModule { }

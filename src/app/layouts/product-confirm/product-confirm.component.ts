@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { Router } from '@angular/router'
 import {  MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog'
 @Component({
@@ -8,12 +9,21 @@ import {  MatDialogRef ,MAT_DIALOG_DATA } from '@angular/material/dialog'
 })
 export class ProductConfirmComponent implements OnInit {
 
+  user;
+  token;
+
   constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
     private router:Router,
     public dialogRef:MatDialogRef<ProductConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public message:string
-    ) { }
-  user = localStorage.getItem('user')
+    ) {
+      if(isPlatformBrowser(platformid)){
+        this.user = localStorage.getItem('user')
+        this.token = localStorage.getItem('token')
+      }
+     }
+ 
   ngOnInit(): void {
   }
 

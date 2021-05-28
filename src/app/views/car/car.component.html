@@ -17,7 +17,7 @@
                     <p>{{ item.product_description | slice: 0:115 }}...</p>
                     <div>
                         <b>cantidad:</b> {{ item.product_amount }} |
-                        <label (click)="carDelete(item.car_id)" class="delete_item">eliminar</label>
+                        <label (click)="opendialog(item.car_id)" class="delete_item">eliminar</label>
                     </div>
                 </div>
                 <div class="store-car-box-part3">
@@ -30,7 +30,7 @@
             <p>
                 Subtotal ({{ totalAmount }} items): <b>{{ subtotal | currency }}</b>
             </p><br>
-            <button mat-flat-button class="paypal" (click)="payPaypal()"><img src="/assets/icons/white-paypal.svg"></button>
+            <button mat-flat-button class="paypal" [disabled]="button" (click)="payPaypal()"><img src="/assets/icons/white-paypal.svg"></button>
             <button mat-flat-button class="efectivo" (click)="payEfectivo()">Efectivo / Deposito <mat-icon>payments</mat-icon></button>
             <!-- <button mat-button class="apple"><img src="/assets/icons/apple.png"></button>
             <button mat-button class="google"><img src="/assets/icons/google-pay.png"></button> -->

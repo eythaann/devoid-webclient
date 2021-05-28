@@ -1,7 +1,7 @@
-<div *ngIf="user" mat-dialog-title>
+<div *ngIf="token" mat-dialog-title>
    <p> Hola, {{user}}</p>
 </div>
-<div *ngIf="user" mat-dialog-content>
+<div *ngIf="token" mat-dialog-content>
     <p>Tu producto ah sido agregado al carrito exitosamente</p>
 </div>
 <div *ngIf="user"mat-dialog-actions align="center">
@@ -9,10 +9,10 @@
     <button mat-button (click)="onClick()" cdkFocusInitial>Ir al carrito</button>
 </div>
 
-<div *ngIf="!user"  mat-dialog-content>
+<div *ngIf="!token"  mat-dialog-content>
     <b>No ha iniciado sesión</b>
 </div>
-<div *ngIf="!user"mat-dialog-actions align="center">
+<div *ngIf="!token"mat-dialog-actions align="center">
     <a mat-dialog-close routerLink="login" mat-button>Iniciar Sesión</a>
     <a mat-dialog-close routerLink="register" mat-button cdkFocusInitial>Nuevo Usuario</a>
 </div>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 
 @Component({
   selector: 'app-header',
@@ -9,13 +8,20 @@ import { Router } from '@angular/router'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
+  ) { 
+    if(isPlatformBrowser(platformid)){
+      this.token = localStorage.getItem('token');
+      this.user = localStorage.getItem('user');
+    }
+  }
 
   ngOnInit(): void {
   }
   
-token = localStorage.getItem('token');
-user = localStorage.getItem('user');
+token!: string | null;
+user!: string | null;
 menu = "menuOff";
 menu2 = "menuOff2"
 

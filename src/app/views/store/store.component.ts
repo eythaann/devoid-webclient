@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { ApiService } from '../../services/api/api.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-
 import { params, productlist } from '../../models/store.interface';
+
+
 
 @Component({
   selector: 'app-store',
@@ -11,34 +13,40 @@ import { params, productlist } from '../../models/store.interface';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  constructor(
-    private api: ApiService,
-    private router: Router,
-    private title: Title,
-  ) {}
 
   product!: productlist[];
   filter: any;
   collection: any 
   category: any
+  params = this.router.parseUrl(this.router.url).queryParams;
 
-  ngOnInit(): void {
+  constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
+    private api: ApiService,
+    private router: Router,
+    private title: Title,
+  ) {
+
     this.title.setTitle('Devoid Online Store');
+    
+  }
+  
+  ngOnInit(): void { 
 
-    let params = this.router.parseUrl(this.router.url).queryParams;
-
-    this.api.getFilters().subscribe(data=>{
-      this.filter = data;
-      this.collection = this.filter[0]
-      this.category = this.filter[1]
-    });
-
-    this.api.getAllProducts(params).subscribe((data) => {
-      this.product = data;
-    });
+    if(isPlatformBrowser(this.platformid)){
+      this.api.getFilters().subscribe(data=>{
+        console.log(data)
+        this.filter = data;
+        this.collection = this.filter[0]
+        this.category = this.filter[1]
+      });
+  
+      this.api.getAllProducts(this.params).subscribe(data => {
+        this.product = data;
+      });
+    }
   }
 
-  
   reload(){
     setTimeout(() => {
       let params = this.router.parseUrl(this.router.url).queryParams;

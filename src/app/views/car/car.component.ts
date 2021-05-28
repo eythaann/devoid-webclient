@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { ApiService } from '../../services/api/api.service'
-import { Router } from '@angular/router'
 import {FormBuilder } from '@angular/forms'
+import { Title } from '@angular/platform-browser'
+import { CartDeleteConfirmComponent } from 'src/app/layouts/cart-delete-confirm/cart-delete-confirm.component'
+import { MatDialog } from '@angular/material/dialog'
 
 @Component({
   selector: 'app-car',
@@ -10,41 +13,64 @@ import {FormBuilder } from '@angular/forms'
 })
 export class CarComponent implements OnInit {
 
-  constructor(private api:ApiService, private fb:FormBuilder, private rt:Router) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
+    private api:ApiService, 
+    private fb:FormBuilder, 
+    private title: Title,
+    private dialog: MatDialog,
+    ) {
+      this.title.setTitle('Carrito - Devoid')
+    }
 
   carDelForm = this.fb.group({
     car_id: '',
-    token: localStorage.getItem('token'),
+    token: '',
   });
 
   carPostForm = this.fb.group({
     total: '',
-    token: localStorage.getItem('token'),
+    token: '',
   })
 
-  cart: boolean = true;
-  car: any;
+  cart: boolean = false;
+  car:any;
   subtotal!: number;
   totalAmount!: number;
+  button: boolean = false;
 
   ngOnInit(): void {
+    
+    if(isPlatformBrowser(this.platformid)){
+      this.api.getCar().subscribe((data:any)=>{
+        if(data.cart === 'no items'){
+          this.cart = false;
+        }else{
+          this.cart = true;
+        this.car = data;
+        console.log(this.car)
+        this.subtotal = this.car.reduce((acc:any,obj:any)=> acc + (obj.product_price * obj.product_amount),
+        0).toFixed(2);
+        this.totalAmount = this.car.reduce((acc:any, obj:any)=> acc + obj.product_amount,
+        0);
+        }
+      });
+    }
+    
+  }
 
-    this.api.getCar().subscribe((data:any)=>{
-      if(data.cart === 'no items'){
-        this.cart = false;
-      }else{
-      this.car = data;
-      this.subtotal = this.car.reduce((acc:any,obj:any)=> acc + (obj.product_price * obj.product_amount),
-      0).toFixed(2);
-      this.totalAmount = this.car.reduce((acc:any, obj:any)=> acc + obj.product_amount,
-      0);
-      }
-    });
+  opendialog(id:number){
+    const dialogRef = this.dialog.open(CartDeleteConfirmComponent, {});
+      dialogRef.afterClosed().subscribe(res=>{
+        if(res){
+          this.carDelete(id)
+        }
+      })
   }
 
   carDelete(id:number){
     this.carDelForm.get('car_id')?.setValue(id)
-
+    this.carDelForm.get('token')?.setValue(localStorage.getItem('token'))
     this.api.deleteCart(this.carDelForm.value).subscribe((data)=>{
       for(let i = 0; i < this.car.length; i++){
         if(this.car[i].car_id === id){
@@ -65,13 +91,19 @@ export class CarComponent implements OnInit {
 
   payPaypal(){
     this.carPostForm.get('total')?.setValue(this.subtotal);
+    this.carPostForm.get('token')?.setValue(localStorage.getItem('token'));
     this.api.payPaypal(this.carPostForm.value).subscribe(((data:any)=>{
-      console.log(data);
       location.href=data;
-    }))
+      this.button = true
+      setTimeout(()=>{
+        this.button = false
+      },3000)
+    }));
   }
 
   payEfectivo(){
-    location.href='https://wa.me/593960011421?text=eyes white M - amount: 1'
+    let wass = 'https://wa.me/593960011421?text='+'Hola, mi nombre es '+localStorage.getItem('user')+' y me gustaria pagar en efectivo/deposito. //'+ localStorage.getItem('token');
+    location.href= wass;
+  
   }
 }

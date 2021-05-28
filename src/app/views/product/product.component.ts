@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
+import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { ApiService } from '../../services/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { carI, productI } from '../../models/store.interface';
 import { MatDialog } from '@angular/material/dialog';
-import {ProductConfirmComponent} from '../../layouts/product-confirm/product-confirm.component';
+import { ProductConfirmComponent } from '../../layouts/product-confirm/product-confirm.component';
 
 @Component({
   selector: 'app-product',
@@ -14,20 +15,11 @@ import {ProductConfirmComponent} from '../../layouts/product-confirm/product-con
 })
 export class ProductComponent implements OnInit {
  
-  constructor(
-    public dialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private activatedrouter: ActivatedRoute,
-    private api: ApiService,
-    private title: Title
-  ) {}
-  
   product!: productI[];
   colors!: any;
   sizes!: any;
   img!: string;
-
+  rutpro: any = this.activatedrouter.snapshot.paramMap.get('rutpro');
 
   carForm = this.fb.group({
     id:     '', 
@@ -35,25 +27,34 @@ export class ProductComponent implements OnInit {
     size:   'm',
     amount: '1',
   });
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformid: object,
+    public dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder,
+    private activatedrouter: ActivatedRoute,
+    private api: ApiService,
+    private title: Title
+  ) {
+    
+  }
   
-  ngOnInit(): void {
-
-    let rutpro: any = this.activatedrouter.snapshot.paramMap.get('rutpro');
-
-    this.api.getProduct(rutpro).subscribe((data) => {
-      console.log(data)
+  ngOnInit(): void { 
+    if(isPlatformBrowser(this.platformid)){
+    this.api.getProduct(this.rutpro).subscribe((data) => {
       this.product = data;
-
       if(this.product[0].error){
-        this.router.navigate([rutpro])
+        this.router.navigate([this.rutpro])
       }else{
       this.carForm.get('id')?.setValue(this.product[0].product_id)
-      this.title.setTitle(this.product[0].product_name+' - Devoid');
       this.colors = JSON.parse(this.product[0].color)
       this.sizes = JSON.parse(this.product[0].size)
+      this.title.setTitle('Devoid Online Store - '+ this.product[0].product_name);
       this.img = `/assets/img/pro/${this.product[0].product_route}_${this.colors[0]}.jpg`;
       }
     });
+    }
   }
 
   onAddCar(form:carI){

@@ -22,7 +22,7 @@ button{
     font-size: small;
     padding-left: 10px;
 }
-a{
+.login-content a{
     color: #11a2ac;
     font-weight: bold;
 }
