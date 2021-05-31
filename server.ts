@@ -29,6 +29,16 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+// Redireccionamiento de WWW a sin WWW
+server.use((req,res,next)=>{
+  if(req.headers.host?.startsWith('www.')){
+    let newhost = req.headers.host.slice(4)
+    res.redirect(301, `https://${newhost}${req.url}`);
+  }else{
+    next();
+  }
+})
+
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });

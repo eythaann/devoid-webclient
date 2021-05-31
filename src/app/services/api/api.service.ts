@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  url:string = 'https://devoid-api.ue.r.appspot.com/api/v1/' // 
+  url:string = 'https://api-devoid.ue.r.appspot.com/api/v1/' // 
   token: string = '';
   
   constructor(
