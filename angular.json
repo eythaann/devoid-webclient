@@ -174,5 +174,8 @@
       }
     }
   },
-  "defaultProject": "DevoidAngular"
+  "defaultProject": "DevoidAngular",
+  "cli": {
+    "analytics": false
+  }
 }

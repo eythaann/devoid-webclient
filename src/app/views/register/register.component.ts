@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api/api.service';
 import { Title } from '@angular/platform-browser';
 import { registeri } from '../../models/login.interface';
 import { Router } from '@angular/router'
+import { MetaService } from 'src/app/services/meta.service';
 
 @Component({
   selector: 'app-register',
@@ -17,22 +18,29 @@ export class RegisterComponent implements OnInit {
   constructor(
     private api: ApiService,
     private title: Title,
+    private meta: MetaService,
     private router: Router,
     ) {
-
+      this.title.setTitle('Register - Devoid')
+      this.meta.generateTags({
+        title:'Registro en Devoid',
+        description:'Registrate en Devoid, la mejor tienda de hodies de latinoamerica'
+    })
+  
     this.registerForm = new FormGroup({
       username: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(30)]),
       email: new FormControl('', [Validators.required,Validators.email,Validators.maxLength(40)]),
       password: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(30)]),
     });
 
-  }
+    }
 
   
 
   registerError!:any;
   
-  ngOnInit(): void {this.title.setTitle('Register - Devoid')}
+  ngOnInit(): void {}
+
   onRegister(form: registeri) {
     if(this.registerForm.valid){
       this.api.registerByEmail(form).subscribe((data) => {
@@ -50,4 +58,5 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
     }
   }
+
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { MetaService } from 'src/app/services/meta.service';
 
 @Component({
   selector: 'app-afiliados',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AfiliadosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private meta:MetaService,
+    private title: Title,
+    ) { 
+      this.title.setTitle('Afiliados - Devoid')
+      this.meta.generateTags({
+        title: 'Afiliados de Devoid',
+        description: 'Patrocina nuestra marca a cambio de recompesas y mas'
+      })
+    }
 
   ngOnInit(): void {
   }

@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api/api.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { params, productlist } from '../../models/store.interface';
+import { MetaService } from 'src/app/services/meta.service';
 
 
 
@@ -25,17 +26,21 @@ export class StoreComponent implements OnInit {
     private api: ApiService,
     private router: Router,
     private title: Title,
+    private meta: MetaService,
   ) {
 
     this.title.setTitle('Devoid Online Store');
-    
+    this.meta.generateTags({
+      title:'Devoid Tienda Online - Productos',
+      description:'Devoid tienda en linea, "la vida es demasiado corta para vestir aburrido" la mejor marca de hodies en latinoamerica.'
+    })
   }
   
   ngOnInit(): void { 
 
     if(isPlatformBrowser(this.platformid)){
       this.api.getFilters().subscribe(data=>{
-        console.log(data)
+        console.log(data);
         this.filter = data;
         this.collection = this.filter[0]
         this.category = this.filter[1]
@@ -52,7 +57,7 @@ export class StoreComponent implements OnInit {
       let params = this.router.parseUrl(this.router.url).queryParams;
       this.api.getAllProducts(params).subscribe((data) => {
       console.log(data)
-      this.product = data;
+      this.product = data; 
     });
     }, 0);
   }

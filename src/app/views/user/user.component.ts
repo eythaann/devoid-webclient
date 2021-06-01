@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { MetaService } from 'src/app/services/meta.service';
 
 @Component({
   selector: 'app-user',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private title:Title,
+    private meta:MetaService,
+  ) { 
+    this.title.setTitle('Mi usuario - Devoid')
+    this.meta.generateTags({
+      title:'Mi usuario, devoid',
+      description:'Devoid configuraciones de usuario'
+    })
+  }
 
   ngOnInit(): void {
   }

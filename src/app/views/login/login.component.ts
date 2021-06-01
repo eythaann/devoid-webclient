@@ -5,7 +5,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api/api.service';
 import { logini } from '../../models/login.interface';
 import { Router } from '@angular/router';
-import { responsei } from 'src/app/models/response.interface';
+import { MetaService } from 'src/app/services/meta.service';
 
 
 @Component({
@@ -23,8 +23,19 @@ export class LoginComponent implements OnInit {
     private api: ApiService,
     private router: Router,
     private fb: FormBuilder,
-    private title: Title
+    private title: Title,
+    private meta: MetaService,
   ) {
+
+    this.title.setTitle('Login - Devoid');
+    this.meta.generateTags({
+      title: 'Inicio de Sesión - Devoid',
+      description: 'Inicia Session en Devoid, la mejor tienda de hodies de latinoamerica',
+    })
+    if(isPlatformBrowser(platformid)){
+      this.checklocalstorage();
+    }
+
     this.loginForm = this.fb.group({
       email: ['',
         [
@@ -39,11 +50,6 @@ export class LoginComponent implements OnInit {
         ]
       ],
     });
-
-    this.title.setTitle('Login - Devoid');
-    if(isPlatformBrowser(platformid)){
-      this.checklocalstorage();
-    }
   }
 
  

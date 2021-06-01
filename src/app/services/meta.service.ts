@@ -12,13 +12,10 @@ export class MetaService {
 
   generateTags(config:metaTags){
     if(config.title !== ''){
-      this.meta.updateTag({ property:'og:title', content:config.title})
-    }
-    if(config.image !== ''){
-      this.meta.updateTag({ property:'og:image', content:'https://devoid.shop/assets/img/meta/'+config.image})
+      this.meta.updateTag({ name:'title', content:config.title})
     }
     if(config.description !== ''){
-      this.meta.updateTag({ property:'og:description', content:config.description})
+      this.meta.updateTag({ name:'description', content:config.description})
     }
   }
 

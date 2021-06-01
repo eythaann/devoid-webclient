@@ -5,6 +5,7 @@ import {FormBuilder } from '@angular/forms'
 import { Title } from '@angular/platform-browser'
 import { CartDeleteConfirmComponent } from 'src/app/layouts/cart-delete-confirm/cart-delete-confirm.component'
 import { MatDialog } from '@angular/material/dialog'
+import { MetaService } from 'src/app/services/meta.service'
 
 @Component({
   selector: 'app-car',
@@ -19,8 +20,13 @@ export class CarComponent implements OnInit {
     private fb:FormBuilder, 
     private title: Title,
     private dialog: MatDialog,
+    private meta: MetaService,
     ) {
       this.title.setTitle('Carrito - Devoid')
+      this.meta.generateTags({
+        title:'Carrito',
+        description:'Ve todos los productos de tu carrito de compras en devoid'
+      })
     }
 
   carDelForm = this.fb.group({

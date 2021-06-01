@@ -89,6 +89,14 @@ const routes: Routes = [
       );
     },
   },
+  {
+    path: 'reset-password',
+    loadChildren: () => {
+      return import('./views/reset-password/reset-password.module').then(
+        (m) => m.ResetPasswordModule
+      );
+    },
+  },
 
   {
     path: '**',

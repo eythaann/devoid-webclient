@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { hsts } from 'helmet'
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -29,8 +30,12 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+
+//strict ssl  - hsts
+  server.use(hsts({maxAge:31536000, includeSubDomains: true}))
+
 // Redireccionamiento de WWW a sin WWW
-server.use((req,res,next)=>{
+  server.use((req,res,next)=>{
   if(req.headers.host?.startsWith('www.')){
     let newhost = req.headers.host.slice(4)
     res.redirect(301, `https://${newhost}${req.url}`);

@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { carI, productI } from '../../models/store.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductConfirmComponent } from '../../layouts/product-confirm/product-confirm.component';
+import { MetaService } from 'src/app/services/meta.service';
 
 @Component({
   selector: 'app-product',
@@ -35,9 +36,14 @@ export class ProductComponent implements OnInit {
     private fb: FormBuilder,
     private activatedrouter: ActivatedRoute,
     private api: ApiService,
-    private title: Title
+    private title: Title,
+    private meta: MetaService,
   ) {
-    
+    this.title.setTitle('Devoid Online Store - '+ this.rutpro);
+    this.meta.generateTags({
+      title:`${this.rutpro} - devoid`,
+      description:`${this.rutpro}, producto de devoid aprovecha para comprarlo ya!`
+    })
   }
   
   ngOnInit(): void { 
