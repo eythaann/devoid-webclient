@@ -40,10 +40,12 @@ export class ApiService {
 /* Store */
   getAllProducts(params:any):Observable<productlist[]>{
     let direccion;
-    if(Object.keys(params).length===0){
-       direccion = this.url + `store`;
+    if(params.category){
+      direccion = this.url + `store?category=${params.category}`;
+    }else if(params.collection){
+       direccion = this.url + `store?collection=${params.collection}`;
     }else{
-       direccion = this.url + `store?category=${params.category}&&collection=${params.collection}`;
+      direccion = this.url + `store`;
     }
     return this.http.get<productlist[]>(direccion);
   };

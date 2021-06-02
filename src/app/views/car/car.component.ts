@@ -49,7 +49,7 @@ export class CarComponent implements OnInit {
     
     if(isPlatformBrowser(this.platformid)){
       this.api.getCar().subscribe((data:any)=>{
-        if(data.cart === 'no items'){
+        if(data.cart === 'no items' || data.error){
           this.cart = false;
         }else{
           this.cart = true;

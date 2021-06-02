@@ -1,111 +1,70 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import { AfiliadosComponent } from './views/afiliados/afiliados.component';
+import { CarComponent } from './views/car/car.component';
+import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
+import { Page404Component } from './views/page404/page404.component';
+import { PaymentComponent } from './views/payment/payment.component';
+import { PointsComponent } from './views/points/points.component';
+import { ProductComponent } from './views/product/product.component';
+import { RedesComponent } from './views/redes/redes.component';
+import { RegisterComponent } from './views/register/register.component';
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+import { StoreComponent } from './views/store/store.component';
+import { SupportComponent } from './views/support/support.component';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => {
-      return import('./views/home/home.module').then((m) => m.HomeModule);
-    },
-    pathMatch: 'full',
+    path: '', component: HomeComponent
   },
 
   {
-    path: 'login',
-    loadChildren: () => {
-      return import('./views/login/login.module').then((m) => m.LoginModule);
-    },
+    path: 'login', component: LoginComponent
   },
 
   {
-    path: 'register',
-    loadChildren: () => {
-      return import('./views/register/register.module').then(
-        (m) => m.RegisterModule
-      );
-    },
+    path: 'register', component: RegisterComponent
   },
 
   {
-    path: 'store',
-    loadChildren: () => {
-      return import('./views/store/store.module').then((m) => m.StoreModule);
-    },
+    path: 'store', component: StoreComponent
   },
 
   {
-    path: 'store/:rutpro',
-    loadChildren: () => {
-      return import('./views/product/product.module').then(
-        (m) => m.ProductModule
-      );
-    },
+    path: 'store/:rutpro', component: ProductComponent
   },
 
   {
-    path: 'cart',
-    loadChildren: () => {
-      return import('./views/car/car.module').then((m) => m.CarModule);
-    },
+    path: 'cart', component: CarComponent
   },
 
   {
-    path: 'afiliados',
-    loadChildren: () => {
-      return import('./views/afiliados/afiliados.module').then(
-        (m) => m.AfiliadosModule
-      );
-    },
+    path: 'afiliados', component: AfiliadosComponent
   },
 
   {
-    path: 'redes',
-    loadChildren: () => {
-      return import('./views/redes/redes.module').then((m) => m.RedesModule);
-    },
+    path: 'redes', component: RedesComponent
   },
 
   {
-    path: 'points',
-    loadChildren: () => {
-      return import('./views/points/points.module').then((m) => m.PointsModule);
-    },
+    path: 'points', component: PointsComponent
   },
 
   {
-    path: 'payment',
-    loadChildren: () => {
-      return import('./views/payment/payment.module').then(
-        (m) => m.PaymentModule
-      );
-    },
+    path: 'payment', component: PaymentComponent
   },
 
   {
-    path: 'support',
-    loadChildren: () => {
-      return import('./views/support/support.module').then(
-        (m) => m.SupportModule
-      );
-    },
+    path: 'support', component: SupportComponent
   },
   {
-    path: 'reset-password',
-    loadChildren: () => {
-      return import('./views/reset-password/reset-password.module').then(
-        (m) => m.ResetPasswordModule
-      );
-    },
+    path: 'reset-password', component: ResetPasswordComponent
+  },
+  {
+    path: '**', component: Page404Component
   },
 
-  {
-    path: '**',
-    loadChildren: () => {
-      return import('./views/page404/page404.module').then(
-        (m) => m.Page404Module
-      );
-    },
-  },
 ];
 
 @NgModule({

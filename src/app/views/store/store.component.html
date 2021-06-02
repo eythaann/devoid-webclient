@@ -16,15 +16,15 @@
         <b>Colecciones</b>
         <ul>
             <li *ngFor="let collection of collection">
-                <a (click)="reload()" routerLink="/store" routerLinkActive="active"
-                    [queryParams]="{collection: collection.id}">{{collection.collection_name}}</a>
+                <a (click)="reload()" [routerLink]="['/store']" routerLinkActive="active"
+                    [queryParams]="{collection: collection.collection_name}" [routerLinkActiveOptions]="{exact: true}">{{collection.collection_name}}</a>
             </li>
         </ul><br>
         <b>Tipo</b>
         <ul>
             <li *ngFor="let category of category">
                 <a (click)="reload()" [routerLink]="['/store']" routerLinkActive="active"
-                    [queryParams]="{category: category.id}">{{category.category_name}}</a>
+                    [queryParams]="{category: category.category_name}" [routerLinkActiveOptions]="{exact: true}">{{category.category_name}}</a>
             </li>
         </ul>
     </div>
@@ -32,7 +32,7 @@
     <div class="store-container-shop">
         <div class="store-shop-content">
             <a mat-button class="store-shop-box" [routerLink]="'/store/'+product.product_route" *ngFor="let product of product">
-                <div class="store-shop-box-img"><img src="/assets/img/pro/{{ product.product_route }}.jpg"></div>
+                <div class="store-shop-box-img"><img src="/assets/img/pro/{{ product.product_route }}.jpg" alt="Devoid {{product.product_name}}"></div>
                 <div class="store-shop-box-tittle">
                     <h3>{{ product.product_name }}</h3>
                 </div>
@@ -42,7 +42,7 @@
             </a>
         </div>
     </div>
-    <div>
+    <div class="store-container-text">
         <p>
             Nos esforzamos por ser una parte integral de la comunidad y siempre
             estamos abiertos a dar la bienvenida a nuevas partes interesadas a

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MetaService } from 'src/app/services/meta.service';
 
@@ -9,9 +10,16 @@ import { MetaService } from 'src/app/services/meta.service';
 })
 export class SupportComponent implements OnInit {
 
+  msg = this.fb.group({
+    email: '',
+    name: '',
+    text: '',
+  })
+
   constructor(
     private title: Title,
-    private meta: MetaService
+    private meta: MetaService,
+    private fb: FormBuilder
     ) {
       this.title.setTitle('Support - Devoid');
       this.meta.generateTags({

@@ -19,7 +19,10 @@
     text-align: center;
     padding-bottom: 1rem;
 }
-
+.store-container-text{
+    grid-column: 1/3;
+    text-align: justify;
+}
 .store-shop-content{
     width: 100%;
     display: grid;

@@ -8,13 +8,12 @@
                     <ul>
                         <li *ngFor="let color of colors">
                             <img (mouseover)="imgChange(color)"
-                                src="/assets/img/pro/{{item.product_route}}_{{color}}.jpg">
+                                src="/assets/img/pro/{{item.product_route}}_{{color}}.jpg" alt="Devoid {{item.product_name}} {{color}}">
                         </li>
                     </ul>
                 </div>
                 <div class="product_big_img">
-                    <lib-ngx-image-zoom [thumbImage]=img [fullImage]=img [magnification]="0.7">
-                    </lib-ngx-image-zoom>
+                    <img src="{{img}}" alt="Devoid {{item.product_name}}">
                 </div>
                 </div>
             </div>

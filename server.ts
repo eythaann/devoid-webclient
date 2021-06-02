@@ -30,6 +30,7 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+// Agregar en Produccion: 
 
 //strict ssl  - hsts
   server.use(hsts({maxAge:31536000, includeSubDomains: true}))
@@ -43,6 +44,7 @@ export function app(): express.Express {
     next();
   }
 })
+
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {

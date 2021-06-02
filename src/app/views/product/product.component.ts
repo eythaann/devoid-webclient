@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
   }
   
   ngOnInit(): void { 
-    if(isPlatformBrowser(this.platformid)){
+    //if(isPlatformBrowser(this.platformid)){
     this.api.getProduct(this.rutpro).subscribe((data) => {
       this.product = data;
       if(this.product[0].error){
@@ -60,7 +60,7 @@ export class ProductComponent implements OnInit {
       this.img = `/assets/img/pro/${this.product[0].product_route}_${this.colors[0]}.jpg`;
       }
     });
-    }
+    //}
   }
 
   onAddCar(form:carI){
