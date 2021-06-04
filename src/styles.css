@@ -16,6 +16,11 @@
     padding: 0;
     box-sizing: border-box;
 }
+p{
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
 img{
     max-width: 100%;
 }
@@ -56,18 +61,6 @@ hr{
     width: 99%;
 }
 
-.ngxImageZoomContainer{
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 5px;
-}
-.ngxImageZoomThumbnail{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
 .displayOnMovil{
     display: none;
 }
@@ -83,39 +76,3 @@ hr{
         display: none;
     }
 }
-/*------------------------------------------------------------------------*/
-/*-----------------------------------USER---------------------------------*/
-/*------------------------------------------------------------------------*/
-.user-container{
-    width: 100%;
-    height: 550px;
-    text-align: left;
-    display: flex;
-}
-.user-menu{
-    width: 20%;
-    height: 100%;
-    border:2px #999 solid;
-}
-.user-menu ul{
-    list-style: none;
-}
-.user-menu ul li a{
-    text-decoration: none;
-    color: black;
-}
-.user-menu ul li a:hover{
-    color: #09f;
-}
-.user-content{
-    width: 80%;
-    height: 100%;
-    border:2px #999 solid;
-}
-.user-content div{
-    width: 100%;
-    margin: 250px 0;
-    text-align: center;
-}
-
-

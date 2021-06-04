@@ -40,11 +40,30 @@
                 </div>
 
                 <div class="store-form2">
-                    
                     <div class="amount">
                         <h2>Cantidad:</h2>
-                        <input type="number" formControlName="amount" min="1" max="10">
+                        <select formControlName="amount">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
                     </div>
+                    <div class="error" *ngIf="carForm.get('color')?.errors && carForm.get('color')?.touched">
+						<div *ngIf="carForm.get('color')?.hasError('required')">escoja un color</div>
+					</div>
+                    <div class="error" *ngIf="carForm.get('size')?.errors &&carForm.get('size')?.touched">
+						<div *ngIf="carForm.get('size')?.hasError('required')">escoja una talla</div>
+					</div>
+                    <div class="error" *ngIf="carForm.get('amount')?.errors &&carForm.get('amount')?.touched">
+						<div *ngIf="carForm.get('amount')?.hasError('required')">el valor minimo es 1</div>
+					</div>
                         <button mat-flat-button class="btn-buy">Comprar</button>
                 </div>
                 <div class="description">

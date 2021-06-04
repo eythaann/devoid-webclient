@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core'
 import { isPlatformBrowser, isPlatformServer } from '@angular/common'
 import { ApiService } from '../../services/api/api.service'
-import {FormBuilder } from '@angular/forms'
-import { Title } from '@angular/platform-browser'
+import {FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { platformBrowser, Title } from '@angular/platform-browser'
 import { CartDeleteConfirmComponent } from 'src/app/layouts/cart-delete-confirm/cart-delete-confirm.component'
 import { MatDialog } from '@angular/material/dialog'
 import { MetaService } from 'src/app/services/meta.service'
@@ -14,6 +14,10 @@ import { MetaService } from 'src/app/services/meta.service'
 })
 export class CarComponent implements OnInit {
 
+token;
+carPostForm!:FormGroup;
+carDelForm!:FormGroup;
+
   constructor(
     @Inject(PLATFORM_ID) private platformid: object,
     private api:ApiService, 
@@ -22,22 +26,28 @@ export class CarComponent implements OnInit {
     private dialog: MatDialog,
     private meta: MetaService,
     ) {
+      if(isPlatformBrowser(this.platformid)){
+        this.token=localStorage.getItem('token')
+      }
+
       this.title.setTitle('Carrito - Devoid')
       this.meta.generateTags({
         title:'Carrito',
         description:'Ve todos los productos de tu carrito de compras en devoid'
+      
+      })
+      this.carDelForm= this.fb.group({
+        car_id: ['',Validators.required],
+        token: [this.token, Validators.required],
+      });
+    
+      this.carPostForm = this.fb.group({
+        method: ['', Validators.required],
+        token: [this.token, Validators.required],
       })
     }
 
-  carDelForm = this.fb.group({
-    car_id: '',
-    token: '',
-  });
-
-  carPostForm = this.fb.group({
-    total: '',
-    token: '',
-  })
+  
 
   cart: boolean = false;
   car:any;
@@ -52,11 +62,10 @@ export class CarComponent implements OnInit {
         if(data.cart === 'no items' || data.error){
           this.cart = false;
         }else{
-          this.cart = true;
+        this.cart = true;
         this.car = data;
-        console.log(this.car)
-        this.subtotal = this.car.reduce((acc:any,obj:any)=> acc + (obj.product_price * obj.product_amount),
-        0).toFixed(2);
+
+        
         this.totalAmount = this.car.reduce((acc:any, obj:any)=> acc + obj.product_amount,
         0);
         }
@@ -76,7 +85,6 @@ export class CarComponent implements OnInit {
 
   carDelete(id:number){
     this.carDelForm.get('car_id')?.setValue(id)
-    this.carDelForm.get('token')?.setValue(localStorage.getItem('token'))
     this.api.deleteCart(this.carDelForm.value).subscribe((data)=>{
       for(let i = 0; i < this.car.length; i++){
         if(this.car[i].car_id === id){
@@ -96,20 +104,29 @@ export class CarComponent implements OnInit {
   }
 
   payPaypal(){
-    this.carPostForm.get('total')?.setValue(this.subtotal);
-    this.carPostForm.get('token')?.setValue(localStorage.getItem('token'));
-    this.api.payPaypal(this.carPostForm.value).subscribe(((data:any)=>{
-      location.href=data;
-      this.button = true
-      setTimeout(()=>{
-        this.button = false
-      },3000)
-    }));
+    this.carPostForm.get('method')?.setValue('paypal')
+    if(this.carPostForm.valid){
+      this.api.pay(this.carPostForm.value).subscribe(((data:any)=>{
+        location.href=data;
+        this.button = true
+        setTimeout(()=>{
+          this.button = false
+        },3000)
+      }));
+    }
   }
 
   payEfectivo(){
-    let wass = 'https://wa.me/593960011421?text='+'Hola, mi nombre es '+localStorage.getItem('user')+' y me gustaria pagar en efectivo/deposito. //'+ localStorage.getItem('token');
-    location.href= wass;
-  
+    this.carPostForm.get('method')?.setValue('efectivo')
+    if(this.carPostForm.valid){
+      this.api.pay(this.carPostForm.value).subscribe(((data:any)=>{
+        console.log(data)
+        location.href=data;
+        this.button = true
+        setTimeout(()=>{
+          this.button = false
+        },2000)
+      }))
+    }
   }
 }

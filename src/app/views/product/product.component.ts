@@ -23,10 +23,10 @@ export class ProductComponent implements OnInit {
   rutpro: any = this.activatedrouter.snapshot.paramMap.get('rutpro');
 
   carForm = this.fb.group({
-    id:     '', 
-    color:  'white',
-    size:   'm',
-    amount: '1',
+    id:     ['', Validators.required], 
+    color:  ['', Validators.required],
+    size:   ['', Validators.required],
+    amount: ['1', Validators.required],
   });
 
   constructor(
@@ -64,14 +64,18 @@ export class ProductComponent implements OnInit {
   }
 
   onAddCar(form:carI){
-    this.api.addCar(form).subscribe(data=>{
-      console.log(data);
-      const dialogRef = this.dialog.open(ProductConfirmComponent, {});
-      dialogRef.afterClosed().subscribe(res=>{
-        console.log(res)
+    if (this.carForm.valid) {
+      this.api.addCar(form).subscribe(data=>{
+        console.log(data);
+        const dialogRef = this.dialog.open(ProductConfirmComponent, {});
+        dialogRef.afterClosed().subscribe(res=>{
+          console.log(res)
+        })
       })
+    }else{
+      this.carForm.markAllAsTouched();
     }
-  )};
+  }
   
 
   imgChange(color:any){

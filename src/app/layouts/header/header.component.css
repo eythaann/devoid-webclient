@@ -127,6 +127,7 @@ mat-icon{
     width: 100%;
     height: 80px;
     box-shadow: 0 0 5px 1px rgba(122, 122, 122, 0.37);
+    display: none;
 }
 @media only screen and (max-width:768px){
     .btn-login{

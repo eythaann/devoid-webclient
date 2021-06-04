@@ -28,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PaymentComponent } from './views/payment/payment.component';
 import { AfiliadosComponent } from './views/afiliados/afiliados.component';
 import { MetaService } from './services/meta.service';
-
+import { OrdersComponent } from './views/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +52,7 @@ import { MetaService } from './services/meta.service';
     RedesComponent,
     ResetPasswordComponent,
     UserComponent,
+    OrdersComponent,
     Page404Component,
   ],
   imports: [

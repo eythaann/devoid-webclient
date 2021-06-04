@@ -98,7 +98,21 @@ img{
     border-radius: 50%;
     box-shadow: 1px 1px 3px 1px #aaa;
 }
-
+.error{
+    color: red;
+    font-size: 12px;
+}
+select{
+    width: 60px;
+    height: 25px;
+    margin: 1.5rem 0;
+    box-shadow: inset 1px 1px 5px 1px rgb(209, 209, 209);
+    border: none;
+    border-radius: 12px;
+}
+select:focus{
+    outline: none;
+}
 .size{
     display: flex;
     justify-content: center;

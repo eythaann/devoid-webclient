@@ -12,14 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  url:string = 'https://api-devoid.ue.r.appspot.com/api/v1/' // 
+  url:string = 'https://api-devoid.ue.r.appspot.com/api/v1/' // https://api-devoid.ue.r.appspot.com/api/v1/
   token: string = '';
   
   constructor(
     @Inject(PLATFORM_ID) private platformid: object,
     private http:HttpClient
     ) {
-      if(isPlatformBrowser(platformid)){
+      if(isPlatformBrowser(this.platformid)){
         this.token = localStorage.getItem('token')||'';
       }
      }
@@ -87,8 +87,15 @@ export class ApiService {
     return this.http.delete(direccion, options);
   }
 
+  getOrder(){
+    let headers = new HttpHeaders({
+      'x-access': this.token,
+    })
+    let direccion = this.url + 'order';
+    return this.http.get(direccion,{headers});
+  }
   /* payments */
-  payPaypal(form:any){
+  pay(form:any){
     let direccion = this.url + 'order';
     return this.http.post(direccion, form);
   }

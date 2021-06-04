@@ -4,6 +4,7 @@ import { AfiliadosComponent } from './views/afiliados/afiliados.component';
 import { CarComponent } from './views/car/car.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { OrdersComponent } from './views/orders/orders.component';
 import { Page404Component } from './views/page404/page404.component';
 import { PaymentComponent } from './views/payment/payment.component';
 import { PointsComponent } from './views/points/points.component';
@@ -60,6 +61,9 @@ const routes: Routes = [
   },
   {
     path: 'reset-password', component: ResetPasswordComponent
+  },
+  {
+    path: 'user/orders', component: OrdersComponent
   },
   {
     path: '**', component: Page404Component

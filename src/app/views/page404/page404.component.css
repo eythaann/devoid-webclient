@@ -8,3 +8,8 @@
 .main-content div{
     text-align: center;
 }
+a{
+    background-color: red;
+    color: #fff;
+    border-radius: 12px;
+}

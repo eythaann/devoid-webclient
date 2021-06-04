@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="store-container">
+    <h1>Mis Compras</h1>
+    <hr />
+    <div *ngIf="swt" class="store-container-car">
+        <div class="store-car-content">
+            <div *ngFor="let item of order" class="store-car-box">
+                <div class="store-car-box-part1">
+                    <img src="assets/img/pro/{{item.product_route}}_{{item.product_color}}.jpg" />
+                </div>
+                <div class="store-car-box-part2">
+                    <h3>
+                        {{ item.product_name }} {{ item.product_color }} -
+                        {{ item.product_size }}
+                    </h3>
+                    <div class="nopagado" *ngIf="item.order_state === 0">
+                        Sin pagar
+                    </div>
+                    <div class="pagado"*ngIf="item.order_state === 1">
+                        Pagado
+                    </div>
+                    <div>
+                        <b>cantidad:</b> {{ item.product_amount }} |
+                    </div>
+                </div>
+                <div class="store-car-box-part3">
+                    <h5>Order ID: {{ item.order_id }}</h5>
+                    <p>{{item.order_date | slice: 0:10}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!swt" class="no-cart">
+        <div>
+            <h2>Ningun producto ha sido comprado</h2><br>
+            <a routerLink="/store"><button>Ver tienda</button></a>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
