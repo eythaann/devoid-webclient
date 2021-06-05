@@ -11,7 +11,7 @@ import { PointsComponent } from './views/points/points.component';
 import { ProductComponent } from './views/product/product.component';
 import { RedesComponent } from './views/redes/redes.component';
 import { RegisterComponent } from './views/register/register.component';
-import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+//import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { StoreComponent } from './views/store/store.component';
 import { SupportComponent } from './views/support/support.component';
 
@@ -59,9 +59,9 @@ const routes: Routes = [
   {
     path: 'support', component: SupportComponent
   },
-  {
-    path: 'reset-password', component: ResetPasswordComponent
-  },
+ // {
+  //  path: 'reset-password', component: ResetPasswordComponent
+ // },
   {
     path: 'user/orders', component: OrdersComponent
   },
