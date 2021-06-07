@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  url:string = 'https://api-devoid.ue.r.appspot.com/api/v1/' // https://api-devoid.ue.r.appspot.com/api/v1/
+  url:string = 'http://localhost:3000/api/v1/' // https://api-devoid.ue.r.appspot.com/api/v1/
   token: string = '';
   
   constructor(
@@ -94,6 +94,21 @@ export class ApiService {
     let direccion = this.url + 'order';
     return this.http.get(direccion,{headers});
   }
+
+  /*direcciones */
+  checkAdress(){
+    let headers = new HttpHeaders({
+      'x-access': this.token,
+    })
+    let direccion = this.url + 'check-adress';
+    return this.http.get(direccion,{headers});
+  }
+
+  postAdress(form:any){
+    let direccion = this.url + 'adress';
+    return this.http.post(direccion, form);
+  }
+
   /* payments */
   pay(form:any){
     let direccion = this.url + 'order';

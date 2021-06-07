@@ -1,0 +1,52 @@
+<div mat-dialog-title>
+    <h2>Dirección</h2>
+</div>
+<div mat-dialog-content>
+    <form [formGroup]="formAdress" (ngSubmit)="sendForm(formAdress.value)">
+        <div>
+            <div class="error" *ngIf="formAdress.get('adress')?.errors && formAdress.get('adress')?.touched">
+                <div *ngIf="formAdress.get('adress')?.hasError('required')">direccion requerida</div>
+            </div>
+            <span>Linea 1 : </span><input type="text" name="Adress1" formControlName="adress" placeholder="linea 1" />
+        </div>
+        <div>
+            <span>Linea 2: </span><input type="text" name="Adress2" formControlName="adress2" placeholder="linea 2" />
+        </div>
+        <div>
+            <div class="error" *ngIf="formAdress.get('country')?.errors && formAdress.get('country')?.touched">
+                <div *ngIf="formAdress.get('country')?.hasError('required')">pais requerido</div>
+            </div>
+            <span>Pais : </span><select formControlName="country">
+                <option>Ecuador</option>
+            </select>
+        </div>
+        <div>
+            <div class="error" *ngIf="formAdress.get('city')?.errors && formAdress.get('city')?.touched">
+                <div *ngIf="formAdress.get('city')?.hasError('required')">ciudad requerida</div>
+            </div>
+            <span>Ciudad:</span><input type="text" name="City" formControlName="city" placeholder="ciudad" />
+        </div>
+        <div>
+            <div class="error" *ngIf="formAdress.get('state')?.errors && formAdress.get('state')?.touched">
+                <div *ngIf="formAdress.get('state')?.hasError('required')">estado requerido</div>
+            </div>
+            <span>Estado/provincia :</span><input type="text" formControlName="state" name="State"
+                placeholder="provincia" />
+        </div>
+        <div>
+            <div class="error" *ngIf="formAdress.get('postal')?.errors && formAdress.get('postal')?.touched">
+                <div *ngIf="formAdress.get('postal')?.hasError('required')">c. postal requerido</div>
+            </div>
+            <span>C. Postal:</span><input type="text" name="postalCode" formControlName="postal"
+                placeholder="codigo postal" />
+        </div>
+        <div>
+            <div class="error" *ngIf="formAdress.get('phone')?.errors && formAdress.get('phone')?.touched">
+                <div *ngIf="formAdress.get('phone')?.hasError('required')">telefono requerido</div>
+            </div>
+            <span>Telefono:</span><input type="text" name="PhoneNumber" formControlName="phone"
+                placeholder="telefono" />
+        </div>
+        <div><button mat-button>Enviar y continuar</button></div>
+    </form>
+</div>

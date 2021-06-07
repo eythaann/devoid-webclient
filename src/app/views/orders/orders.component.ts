@@ -30,7 +30,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformid)){
       this.api.getOrder().subscribe((data:any)=>{
-        console.log(data)
         if(data.orders === 'no items' || data.error){
           this.swt = false;
         }else{

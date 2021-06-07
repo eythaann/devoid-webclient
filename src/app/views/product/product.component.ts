@@ -66,10 +66,8 @@ export class ProductComponent implements OnInit {
   onAddCar(form:carI){
     if (this.carForm.valid) {
       this.api.addCar(form).subscribe(data=>{
-        console.log(data);
         const dialogRef = this.dialog.open(ProductConfirmComponent, {});
         dialogRef.afterClosed().subscribe(res=>{
-          console.log(res)
         })
       })
     }else{

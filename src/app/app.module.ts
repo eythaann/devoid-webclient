@@ -29,6 +29,7 @@ import { PaymentComponent } from './views/payment/payment.component';
 import { AfiliadosComponent } from './views/afiliados/afiliados.component';
 import { MetaService } from './services/meta.service';
 import { OrdersComponent } from './views/orders/orders.component';
+import { AdressComponent } from './layouts/adress/adress.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { OrdersComponent } from './views/orders/orders.component';
     FooterComponent,
     CartDeleteConfirmComponent,
     ProductConfirmComponent,
+    AdressComponent,
     /**views */
     HomeComponent,
     StoreComponent,
