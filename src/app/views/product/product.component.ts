@@ -47,28 +47,33 @@ export class ProductComponent implements OnInit {
   }
   
   ngOnInit(): void { 
-    //if(isPlatformBrowser(this.platformid)){
+    if(isPlatformBrowser(this.platformid)){
     this.api.getProduct(this.rutpro).subscribe((data) => {
       this.product = data;
+      //console.log(data)
       if(this.product[0].error){
         this.router.navigate([this.rutpro])
       }else{
+      //console.log(this.product[0])
+      this.title.setTitle('Devoid Online Store - '+ this.product[0].product_name);
       this.carForm.get('id')?.setValue(this.product[0].product_id)
+      this.img = `/assets/img/pro/${this.product[0].product_route}.jpg`;
       this.colors = JSON.parse(this.product[0].color)
       this.sizes = JSON.parse(this.product[0].size)
-      this.title.setTitle('Devoid Online Store - '+ this.product[0].product_name);
-      this.img = `/assets/img/pro/${this.product[0].product_route}_${this.colors[0]}.jpg`;
       }
     });
-    //}
+    }
   }
 
   onAddCar(form:carI){
     if (this.carForm.valid) {
-      this.api.addCar(form).subscribe(data=>{
-        const dialogRef = this.dialog.open(ProductConfirmComponent, {});
-        dialogRef.afterClosed().subscribe(res=>{
-        })
+      this.api.addCar(form).subscribe((data:any)=>{
+        console.log(data)
+        if(data.res===true){
+          const dialogRef = this.dialog.open(ProductConfirmComponent, {});
+          dialogRef.afterClosed().subscribe(res=>{
+          })
+        }
       })
     }else{
       this.carForm.markAllAsTouched();

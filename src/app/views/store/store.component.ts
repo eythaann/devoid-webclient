@@ -33,7 +33,7 @@ export class StoreComponent implements OnInit {
   
   ngOnInit(): void { 
 
-   //if(isPlatformBrowser(this.platformid)){
+   if(isPlatformBrowser(this.platformid)){
       this.api.getFilters().subscribe(data=>{
         this.filter = data;
         this.collection = this.filter[0]
@@ -41,9 +41,10 @@ export class StoreComponent implements OnInit {
       });
   
       this.api.getAllProducts(this.params).subscribe(data => {
+        console.log(data)
         this.product = data;
       });
-   // }
+    }
   }
 
   reload(){
